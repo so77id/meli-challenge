@@ -10,9 +10,9 @@ MODELS_FILENAME=models.zip
 DATA_FILENAME=MLA_100k_checked_v3.jsonlines
 
 build:
-	docker build -t $(IMAGE_NAME) Dockerfile.jupyter
+	docker build -t $(IMAGE_NAME) ./dockerfiles/.
 
-run:
+run-jupyter:
 	docker run -p $(PORT):8888 -v "${PWD}:/home/jovyan/work" $(IMAGE_NAME)
 
 init:
