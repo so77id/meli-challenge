@@ -1,12 +1,11 @@
 import threading
 from time import sleep
-from prediction_queue import PredictionQueue  # Asume que esta clase ya está definida
+from prediction_queue import PredictionQueue  
 import joblib
 from tensorflow.keras.models import load_model
 import numpy as np
 
-# Asegúrate de que BaseModel, SklearnModel, y KerasModel estén definidos como antes
-from model import BaseModel, SklearnModel, KerasModel  # Ajusta la importación según sea necesario
+from model import BaseModel, SklearnModel, KerasModel 
 
 
 class ModelService:
@@ -25,7 +24,6 @@ class ModelService:
             if not self.queue.is_empty():
                 data, future = self.queue.dequeue()
                 try:
-                    # Asume que data ya está en el formato adecuado para el modelo
                     prediction = self.model.predict(data)
                     future.set_result(prediction)
                 except Exception as e:
@@ -36,5 +34,3 @@ class ModelService:
     def stop(self):
         self.running = False
         self.process_thread.join()
-
-# Nota: Asegúrate de adaptar las importaciones y las rutas de los archivos según tu estructura de proyecto.

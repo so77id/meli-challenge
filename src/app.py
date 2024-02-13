@@ -16,6 +16,7 @@ parser.add_argument('--port', type=int, default=5000, help='Port for the Flask a
 args = parser.parse_args()
 
 # Define el modelo de tu entrada esperada usando el modelado de Flask-RESTX
+# Este es un ejemplo no esta el modelo completo (falta de tiempo :'( )
 input_model = api.model('InputData', {
     'seller_address': fields.Nested(api.model('SellerAddress', {
         'country': fields.Nested(api.model('Country', {
@@ -32,43 +33,33 @@ input_model = api.model('InputData', {
         }))
     })),
     'warranty': fields.String,
-    # Continúa definiendo el resto de los campos de tu JSON aquí...
     'base_price': fields.Float,
     'shipping': fields.Nested(api.model('Shipping', {
-        # Define los campos anidados aquí
     })),
-    # Asegúrate de incluir todos los campos necesarios...
 })
 
 
 def bool_to_int(x):
     return x.astype(int)
-# Definir una función de identidad para usar con FunctionTransformer
 def identity_function(X):
     return X
 
-# Asegúrate de tener esta clase definida correctamente
 data_preprocessor = DataPreprocessor()
 model = load('./models/RandomForestClassifier-model__n_estimators:200.joblib')
 model_service = ModelService(model)
 
 @api.route('/predict')
 class Predict(Resource):
-    @api.expect(input_model)  # Usar el modelo definido para la entrada
+    @api.expect(input_model) 
     def post(self):
-        # Obtén el JSON de entrada de la solicitud
         json_data = request.json
 
-        # Usa el DataPreprocessor para transformar el JSON en un DataFrame listo para el modelo
         df_ready_for_prediction = data_preprocessor.preprocess_json(json_data)
 
-        # Ahora, usa el DataFrame procesado para hacer una predicción
         future = model_service.add_prediction_request(df_ready_for_prediction)
 
-        # Espera el resultado de manera bloqueante
         prediction = future.result()  # Esto bloqueará hasta que el resultado esté disponible
 
-        # Devuelve la predicción como respuesta JSON
         return {'prediction': prediction.tolist()}
 
 if __name__ == '__main__':
