@@ -1,11 +1,7 @@
 import threading
 from time import sleep
-from prediction_queue import PredictionQueue  
-import joblib
-from tensorflow.keras.models import load_model
-import numpy as np
+from prediction_queue import PredictionQueue
 
-from model import BaseModel, SklearnModel, KerasModel 
 
 
 class ModelService:

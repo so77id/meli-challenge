@@ -6,7 +6,9 @@ Este proyecto incluye un análisis de datos, entrenamiento y selección de model
 
 Todo el análisis de datos, entrenamiento y selección de modelos se realiza en el notebook `notebooks/analysis-and-training.ipynb`.
 
-Para ejecutar el Jupyter Notebook con todos los paquetes necesarios, sigue los siguientes pasos utilizando el `Makefile`:
+Puedes ver el documento directamente en github aca [link](https://github.com/so77id/meli-challenge/blob/main/notebooks/analysis-and-training-.ipynb)
+
+O puedes ejecutar el Jupyter Notebook con todos los paquetes necesarios, sigue los siguientes pasos utilizando el `Makefile`:
 
 1. **Inicialización:** Primero, descarga los modelos y la base de datos ejecutando:
 
@@ -29,7 +31,9 @@ Para ejecutar el Jupyter Notebook con todos los paquetes necesarios, sigue los s
     - **Nota:** Recuerda extraer el token de Jupyter y utilizarlo al ingresar a la página `localhost:8888`.
 
     ![](imgs/token-jupyter.png)
+
     Pegalo en la pagina
+    
     ![](imgs/token-in-jupyter.png)
     
 
